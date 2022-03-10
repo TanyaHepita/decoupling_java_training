@@ -1,4 +1,6 @@
-package fr.lernejo;
+package fr.lernejo.logger;
+
+// Suite du fichier (class, enum ou interface)
 
 import java.util.function.BiFunction;
 
