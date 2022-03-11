@@ -1,0 +1,11 @@
+2022-03-11 15:52:11.604 Simulation Le nombre est plus grand 
+
+2022-03-11 15:52:11.629 Simulation Le nombre est plus petit
+
+2022-03-11 15:52:11.630 Simulation Le nombre est plus petit
+
+2022-03-11 15:52:11.631 Simulation Le nombre est plus grand 
+
+2022-03-11 15:52:11.632 Simulation You have won
+
+2022-03-11 15:52:11.690 Simulation Temps total : 00:00:097
