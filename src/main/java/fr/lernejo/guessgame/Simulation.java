@@ -3,14 +3,15 @@ package fr.lernejo.guessgame;
 import fr.lernejo.logger.Logger;
 import fr.lernejo.logger.LoggerFactory;
 
-import java.util.Scanner;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Simulation {
 
-    private final Logger logger = LoggerFactory.getLogger("simulation");
-    private final Player player;  //TODO add variable type
-    private long numberToGuess; //TODO add variable type
-    Scanner scanner = new Scanner(System.in);
+    private final Logger logger = LoggerFactory.getLogger("Simulation");
+    private final Player player;
+    private long numberToGuess;
+
     public Simulation(Player player) {
         this.player=player;
     }
@@ -19,29 +20,41 @@ public class Simulation {
         this.numberToGuess = numberToGuess;
     }
 
-    /**
-     * @return true if the player have guessed the right number
-     */
     private boolean nextRound() {
-        logger.log("donnez un nombre");
-        long p = player.askNextGuess();
-        if (p == numberToGuess) {
+        long guess = player.askNextGuess();
+        if (guess == numberToGuess) {
+            //System.out.println("won \n");
+            //logger.log("won");
             return true;
         }
-        if (p > numberToGuess) {
-            logger.log("plus petit");
+        if (guess > numberToGuess) {
+            logger.log("Le nombre est plus petit\n");
             player.respond(false);
         }else{
-            logger.log("plus grand");
+            logger.log("Le nombre est plus grand \n");
             player.respond(true);
         }
+
         return false;
     }
 
-    public void loopUntilPlayerSucceed() {
-        boolean a = nextRound() ;
-        while(!a){
-            a = nextRound();
+    public void loopUntilPlayerSucceed(long maximumLoops) {
+        boolean won = false;
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < maximumLoops; i++) {
+            if (nextRound()) {
+                won = true;
+                break;
+            }
         }
+        long eLapsedTime = System.currentTimeMillis() - start;
+        if(won)
+        {
+            logger.log("You have won\n");
+        }else {
+            logger.log("Vous avez perdu\n");
+        }
+        logger.log("Temps total : "  + new SimpleDateFormat("mm:ss:SSS").format(new Date(eLapsedTime)));
     }
 }
+
